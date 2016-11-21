@@ -1,13 +1,15 @@
 ---
 title: "Laboratory 1 - Data Driven Security"
-author: "Arnau Sangrà Rocamora"
+author: "Arnau SangrÃ  Rocamora"
 date: "Fall 2016"
 output:
+  html_document:
+    toc: yes
   html_notebook:
-    toc: true
-    toc_float: false
-    number_sections: true
+    number_sections: yes
     theme: spacelab
+    toc: yes
+    toc_float: no
 ---
 
 ```{r setup, include=FALSE}
@@ -40,7 +42,7 @@ The language used in this subject is... **R**. As seen in theory, there are plen
 
 ## Hello World!
 
-Following the tradition, the very first program to code with a new language is the well known _Hello World!_, which shows how to print a salute. 
+Following the tradition, the very first program to code with a new language is the well known _Hello World!_, which shows how to print a salute.
 
 In R, it would look like this:
 ```{r,echo=TRUE}
@@ -50,21 +52,25 @@ which unsurprisingly, prints the famous welcoming phrase.
 
 ## Experimenting with the language
 
+
+
 # R Studio
 
 ```{r, out.width = "200px"}
 knitr::include_graphics("figures/RStudio-Logo-Blue-Gradient.png")
 ```
 
-Although it is possible to write R programs in any modern programming editor, the best environment where to code and execute the R scripts is undoubtedly **R Studio**.
+Although it is possible to write R programs in any modern programming editor, the best environment where to code and execute the R scripts is undoubtedly **R Studio**. This IDE (integrated development environment), available for all major platforms, including Windows, macOSX and many Linux distributions, provides a unique framework to develop R programs in a easy but powerful way. Among the numerous features, RStudio integrates a good source editor and a R interpreter where to run the code.
+
+Moreover, it also has support for different version control systems like git and svn, in addition to the set of tools more strictly related to the R language such as the environment inspector, the package manager or the plot and the help viewer among others.
 
 ## Configure settings
 
-Firstly, as a way to know your new IDE, you should inspect its preferences and set them accordingly to your requirements. 
-  
-As a good practice and in order to prevent future errors everyoine should agree on a minimal configuration:
+Firstly, as a way to know your new IDE, it is very recommendable for you to inspect the preferences and set them accordingly to your requirements.
 
-```{r, out.width = "400px"}
+As a good practice and in order to prevent future errors everyone should agree on a minimal configuration:
+
+```{r, out.width = "500px"}
 knitr::include_graphics("figures/rstudio_settings.png")
 ```
 
@@ -88,20 +94,29 @@ _(Linux/Windows: Edit -> Preferences, OSX: RStudio -> Preferences)_
 
 Note that it is possible to customize the layout of the window so that different sections are arranged differently than default.
 
-*Source* and *Console* sections represent the areas where we'll be spending most of the time. Within _Source_ area, we can view all currently opened files and write our scripts as well. 
+*Source* and *Console* sections represent the areas where we will be spending most of the time. Within _Source_ area, we can view all currently opened files and write our scripts as well.
 
-On the other hand, the console section provides us with an R interpreter so that we can test our code as much as needed until it works. 
+On the other hand, the console section provides us with an R interpreter so that we can test our code as much as needed until it works.
 
-Moreover, it is not necessary to copy and paste every line from the Source  to the Console in order to execute. By using _Ctrl + Enter_ we can evaluate the selected line from source and we will either immediately see the output within the Console or the result of exection in the Environment section.
+// image of rstudio sections.
+
+
+It is not necessary to copy and paste our program's lines from Source to Console in order to execute. By using _Ctrl + Enter / Cmd + Enter (macOSX)_ we can evaluate the selected line from source and we will either immediately see the output within the Console or the result of exection in the Environment section.
+
+By default, the other two sections group beside, the Source and the Console, include the Environment inspector and the history browser in one pane, and the File Inspector, the package manager and the Plots and Help Viewer in the other.
+
 
 ## Debug code
 
-One of the best advantages of using RStudio over other editors is the possibility to easily debug our programs through its integrated debugger. 
+One of the best advantages of using RStudio over other editors is the possibility to easily debug our programs through its integrated debugger.
 
 Additionally, it also allows us to set breakpoints to anywhere in our program so that we can pause the execution at any moment and inspect the environment in this precise moment.
 
+Try to debugger when an erroneous function like 'bad_func' from file r_samples.R is executed. You should see how the console stops at a certain point. At this moment, the environment section from RStudio should contain all the objects and their content at the very moment of the execution error.
+Moreover, you can also navigate through the stack of environments.
 
-
+Now that we have seen how to use the debugger in case of any errors on our code, we can actually take advantage of that by stopping the execution at our will using the breakpoints.
+Try setting a few breakpoints in any of the functions provided. Then execute those and see what happens.
 
 # Git Basics
 
@@ -109,21 +124,64 @@ Additionally, it also allows us to set breakpoints to anywhere in our program so
 knitr::include_graphics("figures/git.png")
 ```
 
-## create _hands on_ project with R Studio
+## Create a _hands on_ project with R Studio
+
+Until now, we have seen a brief introduction to R language and the RStudio IDE, the editor we will be using to create our programs. Now, it is time for us to create our first project, that is, the set of files that will comprise our code, alongside with the configuration settings and any other thing related to our program.
+
+Since we know a little about Git, the VCS, we will be using in this course, and is very likely that at some point we might be interested to share our code, inspect and revert our code to a functional version and more importantly, to be able work effortlesly with other people simultaneously, it is a great idea to make our R project a Git project too.
+
+To do so, just go to File -> New Project, and select the option "New Directory" and "Empty Project". Make sure to checkout the "create a git repository" checkbox.
+
+```{r, out.width = "500px"}
+knitr::include_graphics("figures/new_project.png")
+```
+
+That's it. We now have our first R project, the collection of files that are related to our program.
+
+Notice how a file with _,RProj_ has been added to the root of our project folder. It contains the configurations we set for our project.
+
+Since we have selected the checkbox to create a _git_ repository, RStudio has also initialized our project as a local repository, so that we can start making changes, adding features and commits and all that sort of things related to Git.
+
 ## Commit changes
+
+Once you have added some R code, you can start by adding all the canges made to files to the staging area, where it will remain until it is finally commited.
+Remember that RStudio provides an easy way to stage the files within the Git tab, where by default it shows all the files for your project, allowing you to stage and unstage, to finally commit with a message regarding the changes made.
+
+
 ## Create remote repository on Github
+
+
+
 ## Link local <-> remote repositories
+
+
+
+
 ## Push to remote
+
+
+## Pull from remote
 
 
 # Packages
 
-Packages play a fundamental role in the development of R applications. Written by the R community, provide functionalities already implemented and ready to be used within our programs. 
-manage packages:
-- install,
-- uninstall
+Packages play a fundamental role in the development of R applications. Written by the R community, provide functionalities already implemented and ready to be used within our programs. Thus, most of the best packages or libraries are publicly avaiable on CRAN (the Comprehensive R Archive Network), a very extensive repository for R packages.
+
+However, since CRAN impose certain standards and good practices to ensure certain minimum quality, packages can also be retrieved from other source. The other main alternative for R packages is Github. In there, we can find not only the those packages that do not satisfy the CRAN requirements yet, but also the latest bleeding edge versions of most packages.
+
+
+## Manage installed packages with RStudio
+To manage installed packages, once again, RStudio provide an easy GUI interface that facilitates the administration of the packages. Though it, it is possible to view all already installed packages, install new ones (from CRAN or local folder), update and uninstall.
+
+Try installing some of the very useful packages, that are not part of the R core: dplyr, ggplot2, stringr.
+
+
+## Using installed packages
 - difference between install / load / library
-  
+
+## Creating new packages
+
+A great way to contribute to the R community is to create for example a new package that implements new functionalities so taht other users can make use of it.
 
 - basic structure of package
 
