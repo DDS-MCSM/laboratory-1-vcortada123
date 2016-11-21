@@ -1,0 +1,129 @@
+---
+title: "Laboratory 1 - Data Driven Security"
+author: "Arnau Sangrà Rocamora"
+date: "Fall 2016"
+output:
+  html_notebook:
+    toc: true
+    toc_float: false
+    number_sections: true
+    theme: spacelab
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(fig.align = 'center')
+```
+"default", "cerulean", "journal", "flatly", "readable", "spacelab", "united", "cosmo", "lumen", "paper", "sandstone", "simplex", "yeti"
+## About the laboratory...
+
+Data Driven Security aims to provide an introduction to computer security world, but from a different perspective.
+
+The goal of the subject is to make you not only aware of the implications of the analysis of security information data but also capable to at least explore such data and extract valuable information in a effective way using the correct methodology.
+
+Throughout the laboratories, the theory seen at class will be put in practice in conjunction with other tools and technologies related to the topic. As result, each laboratory will provide you more powerful tools that usually rely on the previous ones, thus, it is specially important to complete proposed exercices as well as understand the concepts.
+
+# R Language
+
+```{r, out.width = "150px"}
+knitr::include_graphics("figures/Rlogo.png")
+```
+
+The language used in this subject is... **R**. As seen in theory, there are plenty of reasons to use this programming language for the tasks where are about to do.
+
+* Ideal for data analysis:
+    + Powerful
+    + Numerous libraries available
+    + Easy graphics generation
+* Great community of developers
+* Open Source
+
+## Hello World!
+
+Following the tradition, the very first program to code with a new language is the well known _Hello World!_, which shows how to print a salute. 
+
+In R, it would look like this:
+```{r,echo=TRUE}
+print("Hello World!")
+```
+which unsurprisingly, prints the famous welcoming phrase.
+
+## Experimenting with the language
+
+# R Studio
+
+```{r, out.width = "200px"}
+knitr::include_graphics("figures/RStudio-Logo-Blue-Gradient.png")
+```
+
+Although it is possible to write R programs in any modern programming editor, the best environment where to code and execute the R scripts is undoubtedly **R Studio**.
+
+## Configure settings
+
+Firstly, as a way to know your new IDE, you should inspect its preferences and set them accordingly to your requirements. 
+  
+As a good practice and in order to prevent future errors everyoine should agree on a minimal configuration:
+
+```{r, out.width = "400px"}
+knitr::include_graphics("figures/rstudio_settings.png")
+```
+
+Open preferences:
+_(Linux/Windows: Edit -> Preferences, OSX: RStudio -> Preferences)_
+
+* _Code_ options:
+    + use _tabs as spaces_, width 2
+    + set _soft wrap_
+    + set _Strip trailing horizontal whitespace_
+    + Saving tab: Line ending conversion "Posix (LF)"
+    + Diagnostics tab: Enable *all* R diagnostics checkboxes
+
+* Other useful settings:
+  + Highlight word, currently selected line, R function calls
+  + show margin (80)
+  + RMarkdown:  	-Show output preview in "Viewer Pane"
+
+
+## Exploring the layout
+
+Note that it is possible to customize the layout of the window so that different sections are arranged differently than default.
+
+*Source* and *Console* sections represent the areas where we'll be spending most of the time. Within _Source_ area, we can view all currently opened files and write our scripts as well. 
+
+On the other hand, the console section provides us with an R interpreter so that we can test our code as much as needed until it works. 
+
+Moreover, it is not necessary to copy and paste every line from the Source  to the Console in order to execute. By using _Ctrl + Enter_ we can evaluate the selected line from source and we will either immediately see the output within the Console or the result of exection in the Environment section.
+
+## Debug code
+
+One of the best advantages of using RStudio over other editors is the possibility to easily debug our programs through its integrated debugger. 
+
+Additionally, it also allows us to set breakpoints to anywhere in our program so that we can pause the execution at any moment and inspect the environment in this precise moment.
+
+
+
+
+# Git Basics
+
+```{r, out.width = "200px"}
+knitr::include_graphics("figures/git.png")
+```
+
+## create _hands on_ project with R Studio
+## Commit changes
+## Create remote repository on Github
+## Link local <-> remote repositories
+## Push to remote
+
+
+# Packages
+
+Packages play a fundamental role in the development of R applications. Written by the R community, provide functionalities already implemented and ready to be used within our programs. 
+manage packages:
+- install,
+- uninstall
+- difference between install / load / library
+  
+
+- basic structure of package
+
