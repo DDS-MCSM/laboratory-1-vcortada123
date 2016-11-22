@@ -69,6 +69,8 @@ To display the help for a given function, just type a question mark before the n
 
 Moreover, documentation usually includes examples with the most common uses.
 
+- _Look up the documentation for the function print()_
+
 --------
 
 # R Studio
@@ -95,10 +97,9 @@ As a good practice and in order to prevent future errors everyone should agree o
 knitr::include_graphics("figures/rstudio_settings.png")
 ```
 
-Open preferences:
-_(Linux/Windows: Edit -> Preferences, OSX: RStudio -> Preferences)_
+- _Open preferences: (Linux/Windows: Edit -> Preferences, OSX: RStudio -> Preferences)_
 
-* _Code_ options:
+- Under _Code_ section, make sure the following options are checked out:
     + use _tabs as spaces_, width 2
     + set _soft wrap_
     + set _Strip trailing horizontal whitespace_
@@ -134,7 +135,7 @@ One of the best advantages of using RStudio over other editors is the possibilit
 
 Additionally, it also allows us to set breakpoints to anywhere in our program so that we can pause the execution at any moment and inspect the environment in this precise moment.
 
-_Try the debugger when an erroneous function like 'bad_func' from file r_samples.R is executed._
+- _Try the debugger when an erroneous function like 'bad_func' from file r_samples.R is executed._
 
 ```{r, echo=TRUE,eval=FALSE}
 bad_func(www.google.com)
@@ -145,7 +146,7 @@ Moreover, you can also navigate through the stack of environments.
 
 Now that we have seen how to use the debugger in case of any errors on our code, we can actually take advantage of that by stopping the execution at our will using the breakpoints.
 
-_Try setting a few breakpoints in any of the functions provided. Then execute those and see what happens._
+- _Try setting a few breakpoints in any of the functions provided. Then execute those and see what happens._
 
 
 -------
@@ -170,13 +171,29 @@ knitr::include_graphics("figures/new_project.png")
 
 That's it. We now have our first R project, the collection of files that are related to our program.
 
-Notice how a file with _,RProj_ has been added to the root of our project folder. It contains the configurations we set for our project.
+Notice how a file with _.RProj_ extension has been added to the root of our project folder. It contains the configurations we set for our project.
 
 Since we have selected the checkbox to create a _git_ repository, RStudio has also initialized our project as a local repository, so that we can start making changes, adding features and commits and all that sort of things related to Git.
 
+_Create a new R file (just a normal file with .R extension). Write some R code. If you don't have any idea, you can always copy the following R program:_
+
+```{r, echo=TRUE, eval=FALSE}
+# This is my first R program
+print("Hello World!")
+
+subject   <- "data driven security"
+language  <- "R"
+print(paste("This is a hands on project written in",
+            language,
+            "for ",
+            subject,
+            "subject",
+            sep = " "))
+```
+
 ## Commit changes
 
-Once you have added some R code, you can start by adding all the canges made to files to the staging area, where it will remain until it is finally commited.
+Once you have added some R code, you can start by adding all the changes made to files to the staging area, where it will remain until it is finally commited.
 
 ```{r, out.width = "500px"}
 knitr::include_graphics("figures/git_staging.png")
@@ -217,6 +234,7 @@ knitr::include_graphics("figures/remote_address.png")
 _Then, open a terminal within the project folder and run the git command to set the direction of the locale_
 
 ```{sh, echo=TRUE, eval=FALSE}
+# substitute '<remote repository address>' with the address copied from GitHub.
 git remote add origin <remote repository address>
 ```
 
@@ -224,13 +242,19 @@ If remote address is correct (https or ssh preferably), our local git repository
 
 ## Push to remote
 
-Despite the fact of adding the address of the remote, it is still impossible to share our changes. since to push our commits we must first specify to which branch we want to send our changes, i.e. it is still necessary to link the _local master branch_ with the _remote master branch_.
+Despite the fact of adding the address of the remote, it is still impossible to share our changes.
+
+Before pushing local commits we must first specify to which branch we want to send our changes, i.e. it is still necessary to link the _local master branch_ with the _remote master branch_.
 
 ```{sh, echo=TRUE, eval=FALSE}
 git push --set-upstream-to=origin/master
 ```
 
 After issuing the previous command, not only we will have established the relation between the master branches (local and remote) but also have send the latest changes made in our local repo to the remote.
+
+```{r push_button, out.width = "500px"}
+knitr::include_graphics("figures/push_btn.png")
+```
 
 From now onwards, the next time we will want to publish the commits made from the local repository to the remote, a simple push will be enough. Since this is a very common action, the green upwards arrow from the git pane send the new commits to the remote so that other developers can fetch it.
 
@@ -239,6 +263,10 @@ From now onwards, the next time we will want to publish the commits made from th
 Lastly, in case we are interested to retrieve the lastest commits pushed to the team remote repository and integrate this to our code, we can use the git command pull.
 
 Similarly to the push action, in RStudio, the blue down arrow from the git pane triggers the pull from the remote.
+
+```{r pull_button, out.width = "500px"}
+knitr::include_graphics("figures/pull_btn.png")
+```
 
 --------
 
@@ -257,11 +285,11 @@ To manage installed packages, once again, RStudio provide an easy GUI interface 
 knitr::include_graphics("figures/manage_packages.png")
 ```
 
-Try installing some of the very useful packages, that are not part of the R core:
 
-* dplyr
-* ggplot2
-* stringr
+- _Try installing some of the very useful packages, that are not part of the R core:_
+    * dplyr
+    * ggplot2
+    * stringr
 
 
 ## Using installed packages
@@ -296,11 +324,12 @@ ggplot(head(db_aggr), aes(x=platform, y=n, fill=platform)) + geom_bar(stat = "id
 
 A great way to contribute to the R community is to create for example a new package that implements new functionalities so taht other users can make use of it.
 
-TODO:
-- basic structure of package
-- install devtools package
-- clone net-basic
-- inspect project/package
+# Devtools as a package to create packages
+
+# Cloning net-basic
+
+# Basic structure of a package
+
 
 ---------
 
