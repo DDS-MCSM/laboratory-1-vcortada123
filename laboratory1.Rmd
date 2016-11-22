@@ -62,7 +62,7 @@ Fortunately, the comunity of R developers usually provides a great documentation
 
 To display the help for a given function, just type a question mark before the name of the function in the Console:
 
-```{r, echo=TRUE}
+```{r, echo=TRUE, eval=FALSE}
 ?help
 # show help for 'help' function
 ```
@@ -77,7 +77,9 @@ Moreover, documentation usually includes examples with the most common uses.
 knitr::include_graphics("figures/RStudio-Logo-Blue-Gradient.png")
 ```
 
-Although it is possible to write R programs in any modern programming editor, the best environment where to code and execute the R scripts is undoubtedly **R Studio**. 
+Before actually getting our hands dirty writing our R programs to analyse data, it is a good step to familiarize with the environment we will be using.
+
+Although it is possible to write R programs in any modern programming editor, the best environment where to code and execute the R scripts is undoubtedly **R Studio**.
 
 This IDE (integrated development environment), available for all major platforms, including Windows, macOSX and many Linux distributions, provides a unique framework to develop R programs in a easy but powerful way. Among the numerous features, RStudio integrates a good source editor and a R interpreter where to run the code.
 
@@ -100,8 +102,8 @@ _(Linux/Windows: Edit -> Preferences, OSX: RStudio -> Preferences)_
     + use _tabs as spaces_, width 2
     + set _soft wrap_
     + set _Strip trailing horizontal whitespace_
-    + Saving tab: Line ending conversion "Posix (LF)"
-    + Diagnostics tab: Enable *all* R diagnostics checkboxes
+    + Saving tab: _Line ending conversion "Posix (LF)"_
+    + Diagnostics tab: _Enable *all* R diagnostics checkboxes_
 
 * Other useful settings:
   + Highlight word, currently selected line, R function calls
@@ -180,7 +182,7 @@ Once you have added some R code, you can start by adding all the canges made to 
 knitr::include_graphics("figures/git_staging.png")
 ```
 
-Remember that RStudio provides an easy way to stage the files within the Git tab, where by default it shows all the files for your project, allowing you to stage and unstage. 
+Remember that RStudio provides an easy way to stage the files within the Git tab, where by default it shows all the files for your project, allowing you to stage and unstage.
 
 _Finally, create at least one new commit with a relevant message regarding the changes made._
 
@@ -198,27 +200,54 @@ knitr::include_graphics("figures/new_github_repo.png")
 
 Once you have crated the repository, we must somehow establish the relation between our R project (which is also the local git repository) and the remote repository before we can actually send our commits to the Github repository.
 
-## Link local <-> remote repositories
+## Link local and remote repositories
 
 In order to share our code, for instance, with any team developer, since each one will use its own local remote it is necessary to link each local repository with the central remote (the one provided by GitHub).
 
 In this matter, Despite the existance of other VCS prgrams offer a graphical interface to easily set the direction of the remote repository, RStudio still does not provide it unless we initially clone an R project directly from a remote.
 
+In this particular case, it will be necessary to manually run the git commands on a shell to establish the remote configuration.
 
+_First of all we must obtain the remote address:_
+
+```{r, out.width = "400px"}
+knitr::include_graphics("figures/remote_address.png")
+```
+
+_Then, open a terminal within the project folder and run the git command to set the direction of the locale_
+
+```{sh, echo=TRUE, eval=FALSE}
+git remote add origin <remote repository address>
+```
+
+If remote address is correct (https or ssh preferably), our local git repository now is aware of the remote repository.
 
 ## Push to remote
 
+Despite the fact of adding the address of the remote, it is still impossible to share our changes. since to push our commits we must first specify to which branch we want to send our changes, i.e. it is still necessary to link the _local master branch_ with the _remote master branch_.
+
+```{sh, echo=TRUE, eval=FALSE}
+git push --set-upstream-to=origin/master
+```
+
+After issuing the previous command, not only we will have established the relation between the master branches (local and remote) but also have send the latest changes made in our local repo to the remote.
+
+From now onwards, the next time we will want to publish the commits made from the local repository to the remote, a simple push will be enough. Since this is a very common action, the green upwards arrow from the git pane send the new commits to the remote so that other developers can fetch it.
 
 ## Pull from remote
 
---------
+Lastly, in case we are interested to retrieve the lastest commits pushed to the team remote repository and integrate this to our code, we can use the git command pull.
 
+Similarly to the push action, in RStudio, the blue down arrow from the git pane triggers the pull from the remote.
+
+--------
 
 # Packages
 
 Packages play a fundamental role in the development of R applications. Written by the R community, provide functionalities already implemented and ready to be used within our programs. Most of the best packages or libraries are publicly avaiable on CRAN (the Comprehensive R Archive Network), a very extensive repository for R packages.
 
-However, since CRAN impose certain standards and good practices to ensure certain minimum quality, packages can also be retrieved from other source. The other main alternative for R packages is Github. In there, we can find not only the those packages that do not satisfy the CRAN requirements yet, but also the latest bleeding edge versions of most packages.
+However, since CRAN impose certain standards and good practices to ensure certain minimum quality, packages can also be retrieved from other source. The other main alternative for R packages is Github.
+There we can find not only the those packages that do not satisfy the CRAN requirements yet, but also the latest bleeding edge versions of most packages.
 
 
 ## Manage installed packages with RStudio
@@ -228,7 +257,7 @@ To manage installed packages, once again, RStudio provide an easy GUI interface 
 knitr::include_graphics("figures/manage_packages.png")
 ```
 
-Try installing some of the very useful packages, that are not part of the R core: 
+Try installing some of the very useful packages, that are not part of the R core:
 
 * dplyr
 * ggplot2
@@ -242,13 +271,13 @@ Once a package has been installed, in order to use the functions that export, i.
 To do so, it is as simple as including the installed package within our program.
 
 ```{r, echo=TRUE}
-library("ggplot2") 
+  library("ggplot2")
 # now we can use functions exported by this package
 ```
 
 ```{r, echo=T, cache=TRUE}
 exploitdb <- "https://raw.githubusercontent.com/offensive-security/exploit-database/master/files.csv"
-#download.file(exploitdb, destfile = "db")
+download.file(exploitdb, destfile = "db")
 db <- read.csv("./db", header = T)
 db_aggr <- dplyr::count(db, platform, sort = T)
 ggplot(db_aggr, aes(x="", y=n, fill=platform))+ geom_bar(width = 1, stat = "identity")
@@ -273,7 +302,7 @@ TODO:
 - clone net-basic
 - inspect project/package
 
---------- 
+---------
 
 # Experimenting with the language
 
@@ -285,7 +314,7 @@ Since following labs will presuppose certain knowledge of R, you should complete
 
 ```{r, echo=TRUE, eval=FALSE}
 if (!require("swirl")) {
-  install.packages("swirl", repos="http://cran.rstudio.com/", quiet = T) 
+  install.packages("swirl", repos="http://cran.rstudio.com/", quiet = T)
 }
 ```
 
