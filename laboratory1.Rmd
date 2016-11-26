@@ -1,6 +1,6 @@
 ---
 title: "Laboratory 1 - Data Driven Security"
-author: "Arnau Sangrà  Rocamora"
+author: "Arnau Sangrà Rocamora"
 date: "Fall 2016"
 output:
   html_document:
@@ -20,6 +20,7 @@ knitr::opts_chunk$set(fig.align = 'center')
 ``` {r, eval=FALSE}
 themes <- "default", "cerulean", "journal", "flatly", "readable", "spacelab", "united", "cosmo", "lumen", "paper", "sandstone", "simplex", "yeti"
 ```
+
 ## About the laboratory...
 
 Data Driven Security aims to provide an introduction to computer security world, but from a different perspective.
