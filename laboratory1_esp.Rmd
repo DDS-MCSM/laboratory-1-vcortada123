@@ -1,0 +1,30 @@
+---
+title: "Laboratory 1 - Data Driven Security"
+author: "Arnau Sangrà Rocamora"
+date: "Fall 2016"
+output:
+  html_document:
+    toc: yes
+  html_notebook:
+    number_sections: yes
+    theme: spacelab
+    toc: yes
+    toc_float: no
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(fig.align = 'center')
+```
+
+``` {r, eval=FALSE}
+themes <- "default", "cerulean", "journal", "flatly", "readable", "spacelab", "united", "cosmo", "lumen", "paper", "sandstone", "simplex", "yeti"
+```
+
+## Sobre el laboratorio...
+
+El Data Driven Security tiene como objetivo proporcionar una introducción a la seguridad informática mundial, pero desde una perspectiva diferente.
+
+El objetivo de la asignatura es hacer que no sólo sea consciente de las implicaciones del análisis de los datos de seguridad de la información, sino también capaz de, al menos, explorar tales datos y extraer información valiosa de una manera eficaz utilizando la metodología correcta.
+
+A lo largo de los laboratorios, la teoría vista en clase se pondrá en práctica conjuntamente con otras herramientas y tecnologías relacionadas con el tema. Como resultado, cada laboratorio le proporcionará herramientas más poderosas que usualmente se basan en las anteriores, por lo tanto, es especialmente importante completar los ejercicios propuestos así como entender los conceptos.

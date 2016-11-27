@@ -23,7 +23,7 @@ themes <- "default", "cerulean", "journal", "flatly", "readable", "spacelab", "u
 
 ## About the laboratory...
 
-Data Driven Security aims to provide an introduction to computer security world, but from a different perspective.
+Data Driven Security aims to provide an introduction to computer security field, but from a different perspective.
 
 The goal of the subject is to make you not only aware of the implications of the analysis of security information data but also capable to at least explore such data and extract valuable information in a effective way using the correct methodology.
 
