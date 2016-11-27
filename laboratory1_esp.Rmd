@@ -23,8 +23,219 @@ themes <- "default", "cerulean", "journal", "flatly", "readable", "spacelab", "u
 
 ## Sobre el laboratorio...
 
-El Data Driven Security tiene como objetivo proporcionar una introducción a la seguridad informática mundial, pero desde una perspectiva diferente.
+El Data Driven Security tiene como objetivo proporcionar una introducción al campo de la seguridad informática, aunque desde una perspectiva distinta.
 
-El objetivo de la asignatura es hacer que no sólo sea consciente de las implicaciones del análisis de los datos de seguridad de la información, sino también capaz de, al menos, explorar tales datos y extraer información valiosa de una manera eficaz utilizando la metodología correcta.
+El objetivo de la asignatura es hacer que no sólo seas consciente de las implicaciones del análisis de los datos de seguridad de la información, sino también que también seas capaz de, al menos, explorar los datos y extraer información valiosa de una manera eficaz utilizando la metodología correcta.
 
-A lo largo de los laboratorios, la teoría vista en clase se pondrá en práctica conjuntamente con otras herramientas y tecnologías relacionadas con el tema. Como resultado, cada laboratorio le proporcionará herramientas más poderosas que usualmente se basan en las anteriores, por lo tanto, es especialmente importante completar los ejercicios propuestos así como entender los conceptos.
+A través de los diferentes laboratorios, la teoría vista en clase se pondrá en práctica conjuntamente con otras herramientas y tecnologías relacionadas con el tema. Como resultado, cada laboratorio proporcionará herramientas más útiles aunque a la vez, más complejas, por lo tanto, es especialmente importante completar los ejercicios propuestos así como entender los conceptos.
+
+#  R 
+
+```{r, out.width = "150px"}
+knitr::include_graphics("figures/Rlogo.png")
+```
+
+El lenguaje utilizado en esta asignatura es ... ** R **. Tal como se ve en la teoría, hay un muchas razones para utilizar este lenguaje de programación para realizar las actividades de este laboratorio.  
+
+* Perfecto para el análisis de datos:
+     + potente
+     + Numerosas bibliotecas disponibles
+     + Fácil generación de gráficos
+* Gran comunidad de desarrolladores
+* Open source
+
+## Hello World!
+
+Como es habitual, el primer programa para codificar con un nuevo idioma es el conocido _Hello World! _, que muestra cómo mostrar por pantalla un saludo.
+
+In R, it would look like this:
+```{r,echo=TRUE}
+print("Hello World!")
+```
+que, sorprendentemente, muestra en pantalla la famosa frase de bienvenida. 
+
+
+## Usando la documentación
+
+Cuando se programa, y especialmente cuando se utiliza un nuevo idioma, a menudo nos encontramos en la situacoón que no sabemos exactamente cómo hacer uso de las funciones que implementan la característica que queremos utilizar.
+
+Afortunadamente, la comunidad de los desarrolladores de R por lo general incluye buena documentación junto con las librerias, por lo que hay una completa descripción de lo que hacen las funciones y los parámetros que  aceptan.
+
+Para mostrar la ayuda de una función determinada, simplemente basta con añadir un signo de interrogación antes del nombre de la función en la consola:
+
+```{r, echo=TRUE, eval=FALSE}
+?help
+# show help for 'help' function
+```
+
+Además, esta documentación suele incluir ejemplos con los casos de uso más frecuentes. 
+
+- _Consultar la documentación para la función "print()"_
+
+--------
+
+# R Studio
+
+```{r, out.width = "200px"}
+knitr::include_graphics("figures/RStudio-Logo-Blue-Gradient.png")
+```
+
+Antes de ponernos manos a la obra, escribir programas en R para analizar datos es una buena introducción para familiarizarnos con el entorno que vamos a usar.
+
+Aunque es posible escribir programas R en cualquier editor de programación moderno, el mejor entorno donde codificar y ejecutar los scripts en R es, sin duda, ** R Studio **.
+
+Este IDE (entorno de desarrollo integrado), disponible para todas las principales plataformas, incluyendo Windows, macOSX y muchas distribuciones de Linux, proporciona un marco único para desarrollar programas en R de una manera fácil pero potente. Entre las numerosas funciones, RStudio integra un buen editor de fuentes y un intérprete de R donde ejecutar el código.
+
+Además, también tiene soporte para diferentes sistemas de control de versiones como git y svn, además del conjunto de herramientas más estrictamente relacionadas con el lenguaje R como el inspector de entorno, el gestor de paquetes o la trama y el visor de ayuda entre otros.
+
+## Configurando las preferencias
+
+En primer lugar, como el objetivo de familiarizarse con el IDE, es muy recomendable inspeccionar las preferencias y configurarlas en consecuencia a las necesidades del proyecto.
+
+Como buena práctica y con el fin de prevenir futuros errores, preferiblemente, todos los equipos de los distintos miembros del equipo todos deben ponerse de acuerdo sobre una configuración mínima:
+
+```{r, out.width = "500px"}
+knitr::include_graphics("figures/rstudio_settings.png")
+```
+
+- _Open preferences: (Linux/Windows: Edit -> Preferences, OSX: RStudio -> Preferences)_
+
+- En la sección _Code_, asegurarse de tener seleccionadas las siguientes opciones:
+    + use _tabs as spaces_, width 2
+    + set _soft wrap_
+    + set _Strip trailing horizontal whitespace_
+    + Saving tab: _Line ending conversion "Posix (LF)"_
+    + Diagnostics tab: _Enable *all* R diagnostics checkboxes_
+
+    * Otras opciones útiles:
+  + Highlight word, currently selected line, R function calls
+  + show margin (80)
+  + RMarkdown:  	-Show output preview in "Viewer Pane"
+
+
+## Explorando el layout
+
+Es posible personalizar el diseño de la ventana para que las diferentes secciones estén dispuestas de forma diferente a la predeterminada.
+
+* Las secciones * Source * y * Console * representan las áreas donde pasaremos la mayor parte del tiempo. Dentro del área _Source_, podemos ver todos los archivos abiertos actualmente y escribir nuestros scripts.
+
+Por otro lado, la sección de consola nos proporciona un intérprete de R para que podamos ejecutar nuestro código tantas veces como sea necesario hasta que funcione.
+
+```{r, out.width = "600px"}
+knitr::include_graphics("figures/rstudio_layout.png")
+```
+No es necesario copiar y pegar las líneas de nuestro programa desde Source a Console para ejecutar. Mediante el uso de _Ctrl + Enter / Cmd + Enter (macOSX) _ podemos evaluar la línea seleccionada desde el origen y veremos inmediatamente la salida dentro de la consola o el resultado de la ejecución en la sección de Environment.
+
+Por defecto, las otras dos secciones al lado de Source y Console, incluyen el inspector del Environment y el explorador de historial en un panel y el inspector de archivos, el administrador de paquetes y el visor de gráficos y ayuda en el otro.
+
+
+## Debug
+
+Una de las ventajas de usar RStudio sobre otros editores es la posibilidad de fácilmente debugguear nuestros programas a través de su debugger integrado.
+
+Además, también nos permite establecer puntos de interrupción en cualquier punto de nuestro programa para que podamos pausar la ejecución en cualquier momento e inspeccionar el entorno en ese preciso momento. 
+
+- _Provar de debugguear cuando se ejecuta una función errónea como 'bad_func' del archivo r_samples.R._
+
+
+```{r, echo=TRUE,eval=FALSE}
+bad_func(www.google.com)
+```
+
+La consola deberia detener la ejecución en una línea determinada. En este momento, la sección de entorno de RStudio debe contener todos los objetos y su valor en el mismo momento del error de ejecución.
+Además, también puede navegar por la pila de entornos.
+
+Ahora que hemos visto cómo usar el debugger en caso de cualquier error en nuestro código, podemos aprovecharlo para detener la ejecución cuando queramos usando los breakpoints.
+
+- Provar de establecer unos cuantos breakpoints en cualquiera de las funciones proporcionadas. A continuación, ejecutarlos y ver lo que sucede._
+
+
+-------
+
+# Git básico
+
+```{r, out.width = "200px"}
+knitr::include_graphics("figures/git.png")
+```
+
+## Crear un proycto  _hands on_ con R Studio
+
+Hasta ahora, hemos visto una breve introducción al lenguaje R y al RStudio IDE, el editor que usaremos para crear nuestros programas. Ahora es el momento de crear nuestro primer proyecto, es decir, el conjunto de archivos que componen nuestro código, junto con los ajustes de configuración y cualquier otra cosa relacionada con nuestro programa.
+
+Puesto que sabemos un poco sobre Git, el VCS que vamos a usar en este curso, y es muy probable que en algún momento podamos estar interesados en compartir nuestro código, inspeccionar y revertirlo a una versión funcional y, lo que es más importante, a ser capaz de trabajar en equipo con otras personas simultáneamente, es una gran idea hacer que nuestro proyecto R también sea un proyecto Git.
+
+Para ello, solo es necesario ir a File -> New Project, y seleccione la opción "New Directory" y "Empty Project". Asegúrese de cerrar la casilla de verificación "create a git repository".
+
+```{r, out.width = "500px"}
+knitr::include_graphics("figures/new_project.png")
+```
+
+Así de simple. Ahora tenemos nuestro primer proyecto en R, la recopilación de archivos que están relacionados con nuestro programa.
+
+Se ha agregado un archivo con extensión _.RProj_ a la raíz de nuestra carpeta, que contiene las configuraciones que establecemos para nuestro proyecto.
+
+Dado que hemos seleccionado la casilla de verificación para crear un repositorio _git_, RStudio también ha inicializado nuestro proyecto como un repositorio local, para que podamos comenzar a realizar cambios, añadir commits.
+
+_Crear un nuevo archivo en R (un archivo normal con la extensión .R). Escribe un código en R. Si no sabes por donde empezar, siempre puede copiar lo siguiente:_
+
+```{r, echo=TRUE, eval=FALSE}
+# This is my first R program
+print("Hello World!")
+
+subject   <- "data driven security"
+language  <- "R"
+print(paste("This is a hands on project written in",
+            language,
+            "for ",
+            subject,
+            "subject",
+            sep = " "))
+```
+
+## Añadiendo cambios
+
+Una vez se ha añadido código, es necesario agregar todos los cambios realizados que se deseen guardar en un _commit_  añadiendo en primer lugar los archivos modificados en el _staging_ área. Así pues, el _staging_ área es una zona donde se almacenan temporalmente todos los cambios hasta que finalmente estos son agrupados en un único _commit_.
+
+```{r, out.width = "500px"}
+knitr::include_graphics("figures/git_staging.png")
+```
+
+RStudio proporciona una manera fácil de organizar los archivos dentro de la pestaña Git, donde por defecto muestra todos los archivos de su proyecto, lo que le permite añadir y quitar ficheros del _staging_ área.
+
+_Finalmente, crear al menos un nuevo commit con un mensaje relevante con respecto a los cambios realizados._
+
+## Crear un repositorio remoto en Github
+
+Aunque git permite trabajar con un repositorio local, todas las ventajas vienen con la posibilidad de trabajar con un repositorio remoto donde enviar los commits permitiendo así que otros vean los cambios que hacemos.
+
+Para crear un repositorio remoto usaremos _GitHub_, un servicio de repositorio freemium en Internet, donde almacenar nuestro código.
+
+_Registrarse en Github y crear el primer repositorio. Para facilitar las cosas, guardala con el mismo nombre que al proyecto R que acabamos de crear._
+
+```{r, out.width = "600px"}
+knitr::include_graphics("figures/new_github_repo.png")
+```
+
+Una vez que haya creado el repositorio, debemos establecer de alguna manera la relación entre nuestro proyecto R (que es también el repositorio git local) y el repositorio remoto antes de que podamos enviar nuestros commit al repositorio Github.
+
+## Enlazar repositorios locales y remotos
+
+Para compartir nuestro código, por ejemplo, con cualquier desarrollador del equipo, ya que cada uno usará su propio control remoto local, es necesario vincular cada repositorio local con el control remoto central (el proporcionado por GitHub).
+
+A pesar de la existencia de otros programas que ofrecen una interfaz gráfica que permite configurar fácilmente la dirección del repositorio remoto, RStudio todavía no permite hacerlo de forma intuitiva a menos que el proyecto se haya añadido mediante la opción de especificar una dirección de un repositorio remoto.
+
+En este caso particular, será necesario ejecutar manualmente los comandos git en la terminal para establecer la configuración remota.
+
+_Primero debemos obtener la dirección remota: _
+
+```{r, out.width = "400px"}
+knitr::include_graphics("figures/remote_address.png")
+```
+
+_A continuación, abra un terminal dentro de la carpeta del proyecto y ejecute el comando git para establecer la dirección de la locale_
+
+```{sh, echo=TRUE, eval=FALSE}
+# substitute '<remote repository address>' with the address copied from GitHub.
+git remote add origin <remote repository address>
+```
+

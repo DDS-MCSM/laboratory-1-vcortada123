@@ -23,7 +23,7 @@ themes <- "default", "cerulean", "journal", "flatly", "readable", "spacelab", "u
 
 ## About the laboratory...
 
-Data Driven Security aims to provide an introduction to computer security field, but from a different perspective.
+Data Driven Security aims to provide an introduction to computer security , but from a different perspective.
 
 The goal of the subject is to make you not only aware of the implications of the analysis of security information data but also capable to at least explore such data and extract valuable information in a effective way using the correct methodology.
 
@@ -125,9 +125,9 @@ On the other hand, the console section provides us with an R interpreter so that
 knitr::include_graphics("figures/rstudio_layout.png")
 ```
 
-It is not necessary to copy and paste our program's lines from Source to Console in order to execute. By using _Ctrl + Enter / Cmd + Enter (macOSX)_ we can evaluate the selected line from source and we will either immediately see the output within the Console or the result of exection in the Environment section.
+It is not necessary to copy and paste our program's lines from Source to Console in order to execute. By using _Ctrl + Enter / Cmd + Enter (macOSX)_ we can evaluate the selected line from source and we will either immediately see the output within the Console or the result of the execution in the Environment section.
 
-By default, the other two sections group beside, the Source and the Console, include the Environment inspector and the history browser in one pane, and the File Inspector, the package manager and the Plots and Help Viewer in the other.
+By default, the other two sections grouped beside the Source and the Console, include the Environment inspector and the history browser in one pane, and the File Inspector, the package manager and the Plots and Help Viewer in the other.
 
 
 ## Debug code
