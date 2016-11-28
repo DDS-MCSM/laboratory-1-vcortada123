@@ -17,28 +17,42 @@ knitr::opts_chunk$set(echo = FALSE)
 knitr::opts_chunk$set(fig.align = 'center')
 ```
 
-``` {r, eval=FALSE}
+```{r bootstrap, message=FALSE, warning=FALSE, include=FALSE}
+if (!suppressMessages(suppressWarnings(require("plyr", quietly = T)))) {
+  suppressMessages(suppressWarnings(install.packages("plyr", repos = "http://cran.rstudio.com/", quiet = T, dependencies = T)))
+}
+if (!suppressMessages(suppressWarnings(require("dplyr", quietly = T)))) {  
+  suppressMessages(suppressWarnings(install.packages("dplyr", repos = "http://cran.rstudio.com/", quiet = T, dependencies = T)))
+}
+if (!suppressMessages(suppressWarnings(require("ggplot2", quietly = T)))) {
+suppressMessages(suppressWarnings(install.packages("ggplot2", repos = "http://cran.rstudio.com/", quiet = T, dependencies = T)))
+}
+```
+
+``` {r themes, echo=FALSE, eval=FALSE}
 themes <- "default", "cerulean", "journal", "flatly", "readable", "spacelab", "united", "cosmo", "lumen", "paper", "sandstone", "simplex", "yeti"
 ```
 
 ## Sobre el laboratorio...
 
-El Data Driven Security tiene como objetivo proporcionar una introducción al campo de la seguridad informática, aunque desde una perspectiva distinta.
+Data Driven Security tiene como objetivo proporcionar una introducción al campo de la seguridad informática, aunque desde una perspectiva distinta.
 
-El objetivo de la asignatura es hacer que no sólo seas consciente de las implicaciones del análisis de los datos de seguridad de la información, sino también que también seas capaz de, al menos, explorar los datos y extraer información valiosa de una manera eficaz utilizando la metodología correcta.
+El objetivo final de la asignatura no es únicamente descubrir las implicaciones del análisis de los datos de seguridad de la información, sino también aportar conocimiento práctivo de forma que  seas capaz de, al menos, explorar datos y extraer información valiosa de manera eficaz siguiendo una metodología correcta.
 
 A través de los diferentes laboratorios, la teoría vista en clase se pondrá en práctica conjuntamente con otras herramientas y tecnologías relacionadas con el tema. Como resultado, cada laboratorio proporcionará herramientas más útiles aunque a la vez, más complejas, por lo tanto, es especialmente importante completar los ejercicios propuestos así como entender los conceptos.
 
+---
+
 #  R 
 
-```{r, out.width = "150px"}
+```{r r_logo, out.width = "150px"}
 knitr::include_graphics("figures/Rlogo.png")
 ```
 
 El lenguaje utilizado en esta asignatura es ... ** R **. Tal como se ve en la teoría, hay un muchas razones para utilizar este lenguaje de programación para realizar las actividades de este laboratorio.  
 
 * Perfecto para el análisis de datos:
-     + potente
+     + Potente
      + Numerosas bibliotecas disponibles
      + Fácil generación de gráficos
 * Gran comunidad de desarrolladores
@@ -46,29 +60,31 @@ El lenguaje utilizado en esta asignatura es ... ** R **. Tal como se ve en la te
 
 ## Hello World!
 
-Como es habitual, el primer programa para codificar con un nuevo idioma es el conocido _Hello World! _, que muestra cómo mostrar por pantalla un saludo.
+Como es habitual, el primer programa para codificar con un nuevo idioma es el simple y conocido programa _Hello World!.
 
-In R, it would look like this:
-```{r,echo=TRUE}
+En R, el programa vendría a ser algo como la siguiente linea de código
+
+```{r hello_world, echo=TRUE}
 print("Hello World!")
 ```
-que, sorprendentemente, muestra en pantalla la famosa frase de bienvenida. 
+
+Una vez ejecutada, sorprendentemente, muestra en pantalla la famosa frase de bienvenida. 
 
 
 ## Usando la documentación
 
-Cuando se programa, y especialmente cuando se utiliza un nuevo idioma, a menudo nos encontramos en la situacoón que no sabemos exactamente cómo hacer uso de las funciones que implementan la característica que queremos utilizar.
+Cuando se programa, y especialmente cuando se utiliza un nuevo lenguaje de programación, a menudo nos encontramos en la situación de no saber exactamente cómo hacer uso de las funciones que implementan la funcionalidad que queremos utilizar.
 
-Afortunadamente, la comunidad de los desarrolladores de R por lo general incluye buena documentación junto con las librerias, por lo que hay una completa descripción de lo que hacen las funciones y los parámetros que  aceptan.
+Afortunadamente, la comunidad de los desarrolladores de R, tiende a incorporar de forma habitual una excelente documentación. Así pues, todos los _packages_ de funciones incluyen instrucciones especialemnte completas, incluyendo descripción de lo que hacen las funciones, los parámetros que  aceptan y detalles de relativos a la implementación.
 
-Para mostrar la ayuda de una función determinada, simplemente basta con añadir un signo de interrogación antes del nombre de la función en la consola:
+Para mostrar la ayuda de una función determinada, simplemente basta con añadir un signo de interrogación antes del nombre de la función en la consola de R:
 
-```{r, echo=TRUE, eval=FALSE}
-?help
+```{r look_for_help, echo=TRUE, eval=FALSE}
 # show help for 'help' function
+?help
 ```
 
-Además, esta documentación suele incluir ejemplos con los casos de uso más frecuentes. 
+Además, la documentación suele también incluir ejemplos con los casos de uso más frecuentes. 
 
 - _Consultar la documentación para la función "print()"_
 
@@ -76,13 +92,13 @@ Además, esta documentación suele incluir ejemplos con los casos de uso más fr
 
 # R Studio
 
-```{r, out.width = "200px"}
+```{r rstudio_logo, out.width = "200px"}
 knitr::include_graphics("figures/RStudio-Logo-Blue-Gradient.png")
 ```
 
-Antes de ponernos manos a la obra, escribir programas en R para analizar datos es una buena introducción para familiarizarnos con el entorno que vamos a usar.
+Antes de ponernos manos a la obra, escribir programas en R para analizar datos es importante familiarizarnos primero con el entorno de desarrollo que vamos a utilizar.
 
-Aunque es posible escribir programas R en cualquier editor de programación moderno, el mejor entorno donde codificar y ejecutar los scripts en R es, sin duda, ** R Studio **.
+Aunque es posible escribir programas R en cualquier editor de programación moderno (Sublime Text, MS Visual Code Studio, vim o emacs, etc), el mejor entorno donde programar R es, sin duda, **[RStudio](https://www.rstudio.com/products/rstudio/)**.
 
 Este IDE (entorno de desarrollo integrado), disponible para todas las principales plataformas, incluyendo Windows, macOSX y muchas distribuciones de Linux, proporciona un marco único para desarrollar programas en R de una manera fácil pero potente. Entre las numerosas funciones, RStudio integra un buen editor de fuentes y un intérprete de R donde ejecutar el código.
 
@@ -90,11 +106,11 @@ Además, también tiene soporte para diferentes sistemas de control de versiones
 
 ## Configurando las preferencias
 
-En primer lugar, como el objetivo de familiarizarse con el IDE, es muy recomendable inspeccionar las preferencias y configurarlas en consecuencia a las necesidades del proyecto.
+En primer lugar, con el objetivo de conocer el IDE (Integrated Development Environment, por sus siglas en inglés), es muy recomendable inspeccionar las preferencias de la aplicación y configurarlas en consecuencia a las necesidades personales, del proyecto o del equipo.
 
 Como buena práctica y con el fin de prevenir futuros errores, preferiblemente, todos los equipos de los distintos miembros del equipo todos deben ponerse de acuerdo sobre una configuración mínima:
 
-```{r, out.width = "500px"}
+```{r rstudio_settings, out.width = "500px"}
 knitr::include_graphics("figures/rstudio_settings.png")
 ```
 
@@ -115,60 +131,64 @@ knitr::include_graphics("figures/rstudio_settings.png")
 
 ## Explorando el layout
 
+La ventana principal de RStudio esta dividida en 4 cuadrantes que contienen las principales herramientas que componen el entorno.
+
 Es posible personalizar el diseño de la ventana para que las diferentes secciones estén dispuestas de forma diferente a la predeterminada.
 
-* Las secciones * Source * y * Console * representan las áreas donde pasaremos la mayor parte del tiempo. Dentro del área _Source_, podemos ver todos los archivos abiertos actualmente y escribir nuestros scripts.
+* Las secciones *Source* y *Console* representan las áreas donde pasaremos la mayor parte del tiempo. Dentro del área _Source_, podemos ver todos los archivos abiertos actualmente y escribir nuestros scripts.
 
 Por otro lado, la sección de consola nos proporciona un intérprete de R para que podamos ejecutar nuestro código tantas veces como sea necesario hasta que funcione.
 
-```{r, out.width = "600px"}
+```{r rstudio_layout, out.width = "600px"}
 knitr::include_graphics("figures/rstudio_layout.png")
 ```
-No es necesario copiar y pegar las líneas de nuestro programa desde Source a Console para ejecutar. Mediante el uso de _Ctrl + Enter / Cmd + Enter (macOSX) _ podemos evaluar la línea seleccionada desde el origen y veremos inmediatamente la salida dentro de la consola o el resultado de la ejecución en la sección de Environment.
+
+No es necesario copiar y pegar las líneas de nuestro programa desde Source a Console para ejecutar. Mediante el uso de _Ctrl + Enter_ / _Cmd + Enter_ (macOSX) podemos evaluar la línea seleccionada desde el origen y veremos inmediatamente la salida dentro de la consola o el resultado de la ejecución en la sección de Environment.
 
 Por defecto, las otras dos secciones al lado de Source y Console, incluyen el inspector del Environment y el explorador de historial en un panel y el inspector de archivos, el administrador de paquetes y el visor de gráficos y ayuda en el otro.
 
 
 ## Debug
 
-Una de las ventajas de usar RStudio sobre otros editores es la posibilidad de fácilmente debugguear nuestros programas a través de su debugger integrado.
+Una de las ventajas de usar RStudio sobre otros editores es la posibilidad de fácilmente depurar nuestros programas a través del debugger integrado.
 
-Además, también nos permite establecer puntos de interrupción en cualquier punto de nuestro programa para que podamos pausar la ejecución en cualquier momento e inspeccionar el entorno en ese preciso momento. 
+Además, también nos permite establecer puntos de interrupción en cualquier punto de nuestro programa para que podamos pausar la ejecución en cualquier momento e inspeccionar el entorno en ese preciso instante de la ejecución. 
 
-- _Provar de debugguear cuando se ejecuta una función errónea como 'bad_func' del archivo r_samples.R._
+- _Prueba el debugger cuando se ejecuta una funció incorrecta, `bad_func()` del archivo r_sample.R, la cual tiene error de ejecución._
 
 
-```{r, echo=TRUE,eval=FALSE}
+```{r debug_func, echo=TRUE,eval=FALSE}
 bad_func(www.google.com)
 ```
 
-La consola deberia detener la ejecución en una línea determinada. En este momento, la sección de entorno de RStudio debe contener todos los objetos y su valor en el mismo momento del error de ejecución.
-Además, también puede navegar por la pila de entornos.
+El interprete debería detener la ejecución en la línea determinada. En este momento, la sección de entorno de RStudio debe contener todos los objetos y su valor en el mismo momento del error de ejecución.
+Además, también permite navegar por la pila de entornos creado durante la ejecución.
 
-Ahora que hemos visto cómo usar el debugger en caso de cualquier error en nuestro código, podemos aprovecharlo para detener la ejecución cuando queramos usando los breakpoints.
+Una vez visto cómo usar el debugger para depurar cualquier error en el código, podemos también aprovecharlo para detener la ejecución en cualquier línea insertando los breakpoints correspondientes.
 
-- Provar de establecer unos cuantos breakpoints en cualquiera de las funciones proporcionadas. A continuación, ejecutarlos y ver lo que sucede._
-
+- Prueba establecer unos cuantos breakpoints en cualquiera de las funciones proporcionadas. A continuación, ejecutarlas y comprueba como se detiene la ejecución en los breakpoints insertados._
 
 -------
 
 # Git básico
 
-```{r, out.width = "200px"}
+```{r git_logo, out.width = "200px"}
 knitr::include_graphics("figures/git.png")
 ```
 
-## Crear un proycto  _hands on_ con R Studio
+## Creando el proyecto _hands on_ con RStudio
 
-Hasta ahora, hemos visto una breve introducción al lenguaje R y al RStudio IDE, el editor que usaremos para crear nuestros programas. Ahora es el momento de crear nuestro primer proyecto, es decir, el conjunto de archivos que componen nuestro código, junto con los ajustes de configuración y cualquier otra cosa relacionada con nuestro programa.
+Hasta ahora, hemos visto una breve introducción al lenguaje R y al RStudio IDE, el editor que usaremos para crear nuestros programas. Ahora es el momento de crear nuestro primer proyecto, es decir, el conjunto de archivos que componen nuestro código, incluyendoj también los ajustes de configuración específicos y cualquier otro fichero relacionado con nuestro programa.
 
-Puesto que sabemos un poco sobre Git, el VCS que vamos a usar en este curso, y es muy probable que en algún momento podamos estar interesados en compartir nuestro código, inspeccionar y revertirlo a una versión funcional y, lo que es más importante, a ser capaz de trabajar en equipo con otras personas simultáneamente, es una gran idea hacer que nuestro proyecto R también sea un proyecto Git.
+Aprovechando que sabemos un poco sobre [Git](https://git-scm.com/), el VCS (Version Control System en inglés), como es probable que en algún momento estemos interesados en compartir facilmente nuestro código, poder revertirlo a una versión funcional si algo deja de funcionar, comprobar el historial de cambios, y lo que es más importante, a ser capaz de trabajar en equipo con otras personas simultáneamente, nuestro proyecto R también se basará Git.
 
-Para ello, solo es necesario ir a File -> New Project, y seleccione la opción "New Directory" y "Empty Project". Asegúrese de cerrar la casilla de verificación "create a git repository".
+Para ello, solo es necesario ir a File -> New Project, y seleccionar la opción "New Directory" y "Empty Project". 
 
-```{r, out.width = "500px"}
+```{r new_project, out.width = "500px"}
 knitr::include_graphics("figures/new_project.png")
 ```
+
+- _Crea un nuevo proyecto de R. Asegurate de marcar la casilla "create a git repository"._
 
 Así de simple. Ahora tenemos nuestro primer proyecto en R, la recopilación de archivos que están relacionados con nuestro programa.
 
@@ -176,9 +196,13 @@ Se ha agregado un archivo con extensión _.RProj_ a la raíz de nuestra carpeta,
 
 Dado que hemos seleccionado la casilla de verificación para crear un repositorio _git_, RStudio también ha inicializado nuestro proyecto como un repositorio local, para que podamos comenzar a realizar cambios, añadir commits.
 
-_Crear un nuevo archivo en R (un archivo normal con la extensión .R). Escribe un código en R. Si no sabes por donde empezar, siempre puede copiar lo siguiente:_
+- _Crea un nuevo archivo en R (en realidad se trata de un archivo normal con extensión `.R`)._
 
-```{r, echo=TRUE, eval=FALSE}
+- _Escribe algun programa con para añadirlo al nuevo proyecto._ 
+
+Si no sabes por donde empezar, siempre puedes utilizar el siguiente código para empezar:_
+
+```{r r_sample, echo=TRUE, eval=FALSE}
 # This is my first R program
 print("Hello World!")
 
@@ -192,33 +216,41 @@ print(paste("This is a hands on project written in",
             sep = " "))
 ```
 
-## Añadiendo cambios
+## Creando commits
 
-Una vez se ha añadido código, es necesario agregar todos los cambios realizados que se deseen guardar en un _commit_  añadiendo en primer lugar los archivos modificados en el _staging_ área. Así pues, el _staging_ área es una zona donde se almacenan temporalmente todos los cambios hasta que finalmente estos son agrupados en un único _commit_.
+El _staging_ área es una zona donde se almacenan temporalmente todos los cambios hasta que finalmente estos son agrupados en un único _commit_.
 
-```{r, out.width = "500px"}
+Una vez se ha añadido código al proyecto, para guardar los cambios al repositorio es necesario agrupar todos los cambios en un _commit_. Para ello, hay que añadir en primer lugar los archivos modificados al _staging area_. 
+
+```{r staging_area, out.width = "500px"}
 knitr::include_graphics("figures/git_staging.png")
 ```
 
 RStudio proporciona una manera fácil de organizar los archivos dentro de la pestaña Git, donde por defecto muestra todos los archivos de su proyecto, lo que le permite añadir y quitar ficheros del _staging_ área.
 
-_Finalmente, crear al menos un nuevo commit con un mensaje relevante con respecto a los cambios realizados._
+- _Finalmente, crea al menos un nuevo commit. Recuerda incluir un mensaje relevante con respecto a los cambios realizados._
 
 ## Crear un repositorio remoto en Github
 
 Aunque git permite trabajar con un repositorio local, todas las ventajas vienen con la posibilidad de trabajar con un repositorio remoto donde enviar los commits permitiendo así que otros vean los cambios que hacemos.
 
-Para crear un repositorio remoto usaremos _GitHub_, un servicio de repositorio freemium en Internet, donde almacenar nuestro código.
+Para crear un repositorio remoto usaremos _[GitHub](https://github.com/)_, un servicio de repositorio freemium en Internet, donde almacenar nuestro código.
 
-_Registrarse en Github y crear el primer repositorio. Para facilitar las cosas, guardala con el mismo nombre que al proyecto R que acabamos de crear._
+- _Registrate en Github._
 
-```{r, out.width = "600px"}
+```{r sign_in_github, out.width = "600px"}
+knitr::include_graphics("figures/sign_up_github.png")
+```
+
+- _Crea un repositorio (público o privado). Para facilitar las cosas, con el mismo nombre que al proyecto R que acabas de crear._
+
+```{r new_github_rep, out.width = "600px"}
 knitr::include_graphics("figures/new_github_repo.png")
 ```
 
-Una vez que haya creado el repositorio, debemos establecer de alguna manera la relación entre nuestro proyecto R (que es también el repositorio git local) y el repositorio remoto antes de que podamos enviar nuestros commit al repositorio Github.
+Una vez hayas creado el repositorio, todavía sera necesario establecer la relación entre nuestro proyecto R (que es también un repositorio git) y el repositorio git remoto antes de que se puedan enviar los cambios al repositorio remoto de Github.
 
-## Enlazar repositorios locales y remotos
+## Enlazar los repositorios local y remoto
 
 Para compartir nuestro código, por ejemplo, con cualquier desarrollador del equipo, ya que cada uno usará su propio control remoto local, es necesario vincular cada repositorio local con el control remoto central (el proporcionado por GitHub).
 
@@ -228,41 +260,42 @@ En este caso particular, será necesario ejecutar manualmente los comandos git e
 
 _Primero debemos obtener la dirección remota: _
 
-```{r, out.width = "400px"}
+```{r get_remote_rep, out.width = "400px"}
 knitr::include_graphics("figures/remote_address.png")
 ```
 
-_A continuación, abra un terminal dentro de la carpeta del proyecto y ejecute el comando git para establecer la dirección de la locale_
+- _A continuación, abre un terminal dentro de la carpeta del proyecto. Ejecute la orden de git para establecer la dirección del repositorio remoto_
 
-```{sh, echo=TRUE, eval=FALSE}
+```{sh add_origin, echo=TRUE, eval=FALSE}
 # substitute '<remote repository address>' with the address copied from GitHub.
 git remote add origin <remote repository address>
 ```
 
-Si la dirección remota es correcta (https o ssh preferiblemente), nuestro repositorio git local ahora es consciente del repositorio remoto.
+Si la dirección remota es correcta (_https_ o _ssh_ preferiblemente), nuestro proyecto git tiene la dirección del repositorio remoto.
 
-## Enviar al remote
+## Push al repositorio remoto
 
 A pesar de añadir la dirección del repositorio remote, aún no es posible compartir nuestros cambios.
 
 Antes de enviar los commits locales, primero debemos especificar a qué rama queremos enviar nuestros cambios, es decir, todavía es necesario vincular el _local master branch_ con el _remote master branch_.
 
-```{sh, echo=TRUE, eval=FALSE}
+```{sh push_to_remote, echo=TRUE, eval=FALSE}
 git push --set-upstream-to=origin/master
 ```
 
-Después de enviar el comando anterior, no solo habremos establecido la relación entre las ramas principales (locales y remotas) sino que también enviaremos los últimos cambios realizados en nuestro repositorio local al repositorio remoto.
+Después de enviar el comando anterior, no solo habremos establecido la relación entre las ramas principales (locales y remotas) sino que también enviaremos los últimos cambios realizados de nuestro repositorio local al repositorio remoto.
 
 ```{r push_button, out.width = "500px"}
 knitr::include_graphics("figures/push_btn.png")
 ```
-De ahora en adelante, la próxima vez que queramos publicar los commits realizados desde el repositorio local al remoto, será suficiente con enviarlo. Dado que se trata de una acción muy común, la flecha verde hacia arriba desde el panel git envía los nuevos commits al control remoto para que otros desarrolladores puedan buscarlo.
+
+De ahora en adelante, las próximas veces que  queramos enviar los commits realizados desde el repositorio local al remoto, será suficiente con hacer push. Dado que se trata de una acción muy común, la flecha verde hacia arriba desde el panel git envía los nuevos commits al control remoto para que otros desarrolladores puedan buscarlo.
 
 ## Pull from remote
 
-Por último, en caso de que estemos interesados en recuperar los últimos commits enviados al repositorio remoto del equipo e integrar esto a nuestro código, podemos usar el comando pull de git.
+Por último, en caso de que estemos interesados en recuperar los últimos commits enviados al repositorio remoto en nuestro repositorio local, podemos usar la orden _pull_ de git.
 
-De forma similar a la acción de enviar, en RStudio, la flecha hacia abajo azul del panel git activa el pull desde el remoto.
+De forma similar al boton para hacer push, en RStudio, la flecha azul hacia abajo del panel  de git hace pull desde el remoto.
 
 ```{r pull_button, out.width = "500px"}
 knitr::include_graphics("figures/pull_btn.png")
@@ -272,7 +305,7 @@ knitr::include_graphics("figures/pull_btn.png")
 
 # Paquetes
 
-Los paquetes desempeñan un papel fundamental en el desarrollo de aplicaciones R. Escritos por la comunidad R, proporciona funcionalidades ya implementadas y listas para ser utilizadas dentro de nuestros programas. La mayoría de los mejores paquetes o bibliotecas están disponibles públicamente en CRAN (Comprehensive R Archive Network), un repositorio muy extenso para paquetes R.
+Los paquetes desempeñan un papel fundamental en el desarrollo de aplicaciones R. Escritos por la comunidad R, proporciona funcionalidades ya implementadas y listas para ser utilizadas dentro de nuestros programas. La mayoría de los mejores paquetes o bibliotecas están disponibles públicamente en [CRAN](https://cran.r-project.org/) (Comprehensive R Archive Network en inglés), un repositorio muy extenso para paquetes R.
 
 Sin embargo, como el CRAN impone ciertos estándares y buenas prácticas para asegurar una calidad mínima, también podemos obtener paquetes de otras fuentes. La otra alternativa principal para los paquetes R es Github.
 Allí podemos encontrar no sólo los paquetes que todavía no satisfacen los requisitos de CRAN, sino también las últimas versiones de sangrado de la mayoría de los paquetes.
@@ -288,19 +321,19 @@ knitr::include_graphics("figures/manage_packages.png")
 
 
 - _Provar de instalar algunos paquetes útiles, que no formen parte de R:_
-    * dplyr
-    * ggplot2
-    * stringr
+    * `xml`
+    * `lubridate`
+    * `stringr`
 
 
 ## Usando los paquetes instalados
 
 Una vez que se ha instalado un paquete, con el fin de utilizar las funciones que exportan, es decir, las características que queremos utilizar, primero debemos cargarlos en la memoria para poder usarlos.
 
-Para ello, es tan simple como incluir el paquete instalado en nuestro programa.
+Para ello, basta con incluir el paquete instalado en nuestro programa.
 
-```{r, echo=TRUE}
-  library("ggplot2")
+```{r load_package, echo=TRUE, warning=FALSE}
+library("ggplot2")
 # now we can use functions exported by this package
 ```
 
@@ -312,7 +345,7 @@ db_aggr <- dplyr::count(db, platform, sort = T)
 ggplot(db_aggr, aes(x="", y=n, fill=platform))+ geom_bar(width = 1, stat = "identity")
 ```
 
-De esta manera, podremos llamar a las diferentes funciones de nuestro código.
+De esta manera, podremos llamar a las diferentes funciones exportadas desde nuestro código.
 
 Por ejemplo, usando dply y ggplot, podemos ver fácilmente las plataformas con más vulnerabilidades
 
@@ -320,17 +353,6 @@ Por ejemplo, usando dply y ggplot, podemos ver fácilmente las plataformas con m
 db_aggr <- dplyr::count(db, platform, sort = T)
 ggplot(head(db_aggr), aes(x=platform, y=n, fill=platform)) + geom_bar(stat = "identity")
 ```
-
-## Creando nuevos paquetes
-
-Una forma de contribuir a la comunidad R es crear, por ejemplo, un nuevo paquete que implemente nuevas funcionalidades para que otros usuarios puedan hacer uso de ellas.
-
-# Devtools como un paquete para crear paquetes
-
-# Cloning net-basic
-
-# Estructura básica de un paquete
-
 
 ---------
 
@@ -340,22 +362,29 @@ Hasta ahora, hemos visto los principios básicos sobre los que vamos a construir
 
 Puesto que los siguientes laboratorios presuponen un cierto conocimiento de R, se debe completar la introducción de swirl, ya que representa una gran introducción al lenguaje en si de una manera interactiva y guiada.
 
-1. Instalar el paquete Swirl (utilizar el panel de paquetes o seguir las instrucciones R en la consola):
+1. _Instala el paquete Swirl (puedes utilizar tanto el panel de paquetes como las funciones R en la consola directamente):_
 
-```{r, echo=TRUE, eval=FALSE}
+```{r install_swirl, echo=TRUE, eval=FALSE}
 if (!require("swirl")) {
   install.packages("swirl", repos="http://cran.rstudio.com/", quiet = T)
 }
 ```
 
-2. Load the just installed package:
+2. _Carga el paquete Swirl:_
 
-```{r, echo=T, eval=FALSE}
+```{r load_swirl, echo=T, eval=FALSE}
 library("swirl")
 ```
 
-3. Launch swirl and complete the tutorial:
+3. _Ejecuta Swirl. Completa el tutorial interactivo:_
 
-```{r, echo=TRUE,eval=FALSE}
+```{r launch_swirl, echo=TRUE,eval=FALSE}
 swirl()
 ```
+
+# Material Complementario
+
+- [RStudio Cheatsheet](https://www.rstudio.com/wp-content/uploads/2016/01/rstudio-IDE-cheatsheet.pdf)
+- [Interactive R Tutorial](http://tryr.codeschool.com/)
+- [Interactice Git Tutorial](https://try.github.io/levels/1/challenges/1)
+- [Git Book](https://git-scm.com/book/en/v2)

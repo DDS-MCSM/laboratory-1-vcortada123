@@ -17,7 +17,14 @@ knitr::opts_chunk$set(echo = FALSE)
 knitr::opts_chunk$set(fig.align = 'center')
 ```
 
-``` {r, eval=FALSE}
+
+```{r bootstrap, message=FALSE, warning=FALSE, include=FALSE}
+suppressMessages(suppressWarnings(install.packages("plyr", repos="http://cran.rstudio.com/", quiet = T, dependencies = T)))
+suppressMessages(suppressWarnings(install.packages("dplyr", repos="http://cran.rstudio.com/", quiet = T, dependencies = T)))
+suppressMessages(suppressWarnings(install.packages("ggplot2", repos="http://cran.rstudio.com/", quiet = T, dependencies = T)))
+```
+
+``` {r themes, echo=FALSE, eval=FALSE}
 themes <- "default", "cerulean", "journal", "flatly", "readable", "spacelab", "united", "cosmo", "lumen", "paper", "sandstone", "simplex", "yeti"
 ```
 
@@ -29,9 +36,11 @@ The goal of the subject is to make you not only aware of the implications of the
 
 Throughout the laboratories, the theory seen at class will be put in practice in conjunction with other tools and technologies related to the topic. As result, each laboratory will provide you more powerful tools that usually rely on the previous ones, thus, it is specially important to complete proposed exercices as well as understand the concepts.
 
+---
+
 # R Language
 
-```{r, out.width = "150px"}
+```{r r_logo, out.width = "150px"}
 knitr::include_graphics("figures/Rlogo.png")
 ```
 
@@ -49,9 +58,11 @@ The language used in this subject is... **R**. As seen in theory, there are plen
 Following the tradition, the very first program to code with a new language is the well known _Hello World!_, which shows how to print a salute.
 
 In R, it would look like this:
-```{r,echo=TRUE}
+
+```{r hello_world, echo=TRUE}
 print("Hello World!")
 ```
+
 which unsurprisingly, prints the famous welcoming phrase.
 
 
@@ -63,7 +74,7 @@ Fortunately, the comunity of R developers usually provides a great documentation
 
 To display the help for a given function, just type a question mark before the name of the function in the Console:
 
-```{r, echo=TRUE, eval=FALSE}
+```{r look_for_help, echo=TRUE, eval=FALSE}
 ?help
 # show help for 'help' function
 ```
@@ -76,7 +87,7 @@ Moreover, documentation usually includes examples with the most common uses.
 
 # R Studio
 
-```{r, out.width = "200px"}
+```{r rstudio_logo, out.width = "200px"}
 knitr::include_graphics("figures/RStudio-Logo-Blue-Gradient.png")
 ```
 
@@ -94,7 +105,7 @@ Firstly, as a way to know your new IDE, it is very recommendable for you to insp
 
 As a good practice and in order to prevent future errors everyone should agree on a minimal configuration:
 
-```{r, out.width = "500px"}
+```{r rstudio_settings, out.width = "500px"}
 knitr::include_graphics("figures/rstudio_settings.png")
 ```
 
@@ -115,13 +126,15 @@ knitr::include_graphics("figures/rstudio_settings.png")
 
 ## Exploring the layout
 
+The main RStudio window is divided into 4 different sections that contain the main different tools that compose the application.
+
 Note that it is possible to customize the layout of the window so that different sections are arranged differently than default.
 
 *Source* and *Console* sections represent the areas where we will be spending most of the time. Within _Source_ area, we can view all currently opened files and write our scripts as well.
 
 On the other hand, the console section provides us with an R interpreter so that we can test our code as much as needed until it works.
 
-```{r, out.width = "600px"}
+```{r rstudio_layout, out.width = "600px"}
 knitr::include_graphics("figures/rstudio_layout.png")
 ```
 
@@ -136,9 +149,9 @@ One of the best advantages of using RStudio over other editors is the possibilit
 
 Additionally, it also allows us to set breakpoints to anywhere in our program so that we can pause the execution at any moment and inspect the environment in this precise moment.
 
-- _Try the debugger when an erroneous function like 'bad_func' from file r_samples.R is executed._
+- _Try the debugger when an erroneous function like `bad_func()` from file `r_sample.R` is executed._
 
-```{r, echo=TRUE,eval=FALSE}
+```{r debug_func, echo=TRUE,eval=FALSE}
 bad_func(www.google.com)
 ```
 
@@ -154,7 +167,7 @@ Now that we have seen how to use the debugger in case of any errors on our code,
 
 # Git Basics
 
-```{r, out.width = "200px"}
+```{r git_logo, out.width = "200px"}
 knitr::include_graphics("figures/git.png")
 ```
 
@@ -162,11 +175,11 @@ knitr::include_graphics("figures/git.png")
 
 Until now, we have seen a brief introduction to R language and the RStudio IDE, the editor we will be using to create our programs. Now, it is time for us to create our first project, that is, the set of files that will comprise our code, alongside with the configuration settings and any other thing related to our program.
 
-Since we know a little about Git, the VCS, we will be using in this course, and is very likely that at some point we might be interested to share our code, inspect and revert our code to a functional version and more importantly, to be able work effortlesly with other people simultaneously, it is a great idea to make our R project a Git project too.
+Since we know a little about [Git](https://git-scm.com/), the VCS, we will be using in this course, and is very likely that at some point we might be interested to share our code, inspect and revert our code to a functional version and more importantly, to be able work effortlesly with other people simultaneously, it is a great idea to make our R project a Git project too.
 
 To do so, just go to File -> New Project, and select the option "New Directory" and "Empty Project". Make sure to checkout the "create a git repository" checkbox.
 
-```{r, out.width = "500px"}
+```{r new_project, out.width = "500px"}
 knitr::include_graphics("figures/new_project.png")
 ```
 
@@ -176,9 +189,9 @@ Notice how a file with _.RProj_ extension has been added to the root of our proj
 
 Since we have selected the checkbox to create a _git_ repository, RStudio has also initialized our project as a local repository, so that we can start making changes, adding features and commits and all that sort of things related to Git.
 
-_Create a new R file (just a normal file with .R extension). Write some R code. If you don't have any idea, you can always copy the following R program:_
+- _Create a new R file (a normal file with .R extension). Write some R code. If you don't have any idea, you can always copy the following R program:_
 
-```{r, echo=TRUE, eval=FALSE}
+```{r r_sample, echo=TRUE, eval=FALSE}
 # This is my first R program
 print("Hello World!")
 
@@ -196,23 +209,31 @@ print(paste("This is a hands on project written in",
 
 Once you have added some R code, you can start by adding all the changes made to files to the staging area, where it will remain until it is finally commited.
 
-```{r, out.width = "500px"}
+```{r staging_area, out.width = "500px"}
 knitr::include_graphics("figures/git_staging.png")
 ```
 
 Remember that RStudio provides an easy way to stage the files within the Git tab, where by default it shows all the files for your project, allowing you to stage and unstage.
 
-_Finally, create at least one new commit with a relevant message regarding the changes made._
+- _Finally, create at least one new commit. Remember to include a relevant commmit message regarding the changes included._
 
 ## Create remote repository on Github
 
 Although git allows you to work only using a local repository, all the advantages come with the existance of a remote repository to where to push the commits hence allowing others to get the changes we make.
 
-To create a remote repository we will be using _GitHub_, a freemium repository service on the Internet, where to store our code.
+To create a remote repository we will be using _[GitHub](https://github.com/)_, a freemium repository service on the Internet, where to store our code.
 
-_Sign Up to Github and create your first repository. To make things easy, name it equally to the R project we have just created._
+- _Sign up to Github_
 
-```{r, out.width = "600px"}
+```{r sign_in_github, out.width = "600px"}
+knitr::include_graphics("figures/sign_up_github.png")
+```
+
+- _Create your first repository. To make things easy, name it equally to the R project we have just created._
+
+
+
+```{r new_github_rep, out.width = "600px"}
 knitr::include_graphics("figures/new_github_repo.png")
 ```
 
@@ -228,13 +249,13 @@ In this particular case, it will be necessary to manually run the git commands o
 
 _First of all we must obtain the remote address:_
 
-```{r, out.width = "400px"}
+```{r get_remote_rep, out.width = "400px"}
 knitr::include_graphics("figures/remote_address.png")
 ```
 
 _Then, open a terminal within the project folder and run the git command to set the direction of the locale_
 
-```{sh, echo=TRUE, eval=FALSE}
+```{sh add_origin, echo=TRUE, eval=FALSE}
 # substitute '<remote repository address>' with the address copied from GitHub.
 git remote add origin <remote repository address>
 ```
@@ -247,7 +268,7 @@ Despite the fact of adding the address of the remote, it is still impossible to 
 
 Before pushing local commits we must first specify to which branch we want to send our changes, i.e. it is still necessary to link the _local master branch_ with the _remote master branch_.
 
-```{sh, echo=TRUE, eval=FALSE}
+```{sh push_to_remote, echo=TRUE, eval=FALSE}
 git push --set-upstream-to=origin/master
 ```
 
@@ -273,7 +294,7 @@ knitr::include_graphics("figures/pull_btn.png")
 
 # Packages
 
-Packages play a fundamental role in the development of R applications. Written by the R community, provide functionalities already implemented and ready to be used within our programs. Most of the best packages or libraries are publicly avaiable on CRAN (the Comprehensive R Archive Network), a very extensive repository for R packages.
+Packages play a fundamental role in the development of R applications. Written by the R community, provide functionalities already implemented and ready to be used within our programs. Most of the best packages or libraries are publicly avaiable on [CRAN](https://cran.r-project.org/) (the Comprehensive R Archive Network), a very extensive repository for R packages.
 
 However, since CRAN impose certain standards and good practices to ensure certain minimum quality, packages can also be retrieved from other source. The other main alternative for R packages is Github.
 There we can find not only the those packages that do not satisfy the CRAN requirements yet, but also the latest bleeding edge versions of most packages.
@@ -289,9 +310,9 @@ knitr::include_graphics("figures/manage_packages.png")
 
 
 - _Try installing some of the very useful packages, that are not part of the R core:_
-    * dplyr
-    * ggplot2
-    * stringr
+    * `xml`
+    * `lubridate`
+    * `stringr`
 
 
 ## Using installed packages
@@ -300,8 +321,8 @@ Once a package has been installed, in order to use the functions that export, i.
 
 To do so, it is as simple as including the installed package within our program.
 
-```{r, echo=TRUE}
-  library("ggplot2")
+```{r load_package, echo=TRUE, warning=FALSE}
+library("ggplot2")
 # now we can use functions exported by this package
 ```
 
@@ -322,17 +343,6 @@ db_aggr <- dplyr::count(db, platform, sort = T)
 ggplot(head(db_aggr), aes(x=platform, y=n, fill=platform)) + geom_bar(stat = "identity")
 ```
 
-## Creating new packages
-
-A great way to contribute to the R community is to create for example a new package that implements new functionalities so taht other users can make use of it.
-
-# Devtools as a package to create packages
-
-# Cloning net-basic
-
-# Basic structure of a package
-
-
 ---------
 
 # Experimenting with the language
@@ -341,23 +351,29 @@ Until now, we have seen the very basics over which we will build up the future l
 
 Since following labs will presuppose certain knowledge of R, you should complete the swirl introduction, as it represents a great introduction to the language itself, in a interactive and guided way.
 
-1. Install Swirl package (either use the packages pane or following R instruction on the console):
+1. _Install Swirl package (either use the packages pane or following R instruction on the console):_
 
-```{r, echo=TRUE, eval=FALSE}
+```{r install_swirl, echo=TRUE, eval=FALSE}
 if (!require("swirl")) {
   install.packages("swirl", repos="http://cran.rstudio.com/", quiet = T)
 }
 ```
 
-2. Load the just installed package:
+2. _Load the just installed package:_
 
-```{r, echo=T, eval=FALSE}
+```{r load_swirl, echo=T, eval=FALSE}
 library("swirl")
 ```
 
-3. Launch swirl and complete the tutorial:
+3. _Launch swirl and complete the tutorial:_
 
-```{r, echo=TRUE,eval=FALSE}
+```{r launch_swirl, echo=TRUE,eval=FALSE}
 swirl()
 ```
 
+# Complementary references
+
+- [RStudio Cheatsheet](https://www.rstudio.com/wp-content/uploads/2016/01/rstudio-IDE-cheatsheet.pdf)
+- [Interactice Git Tutorial](https://try.github.io/levels/1/challenges/1)
+- [Interactive R Tutorial](http://tryr.codeschool.com/)
+- [Git Book](https://git-scm.com/book/en/v2)
