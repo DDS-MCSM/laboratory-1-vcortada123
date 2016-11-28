@@ -43,20 +43,22 @@ A través de los diferentes laboratorios, la teoría vista en clase se pondrá e
 
 ---
 
+&nbsp;
+
 #  R 
 
 ```{r r_logo, out.width = "150px"}
 knitr::include_graphics("figures/Rlogo.png")
 ```
 
-El lenguaje utilizado en esta asignatura es ... ** R **. Tal como se ve en la teoría, hay un muchas razones para utilizar este lenguaje de programación para realizar las actividades de este laboratorio.  
+El lenguaje utilizado en esta asignatura es ...*R*. Tal como se ve en la teoría, hay un muchas razones para utilizar este lenguaje de programación para realizar las actividades de este laboratorio.  
 
-* Perfecto para el análisis de datos:
-     + Potente
-     + Numerosas bibliotecas disponibles
-     + Fácil generación de gráficos
-* Gran comunidad de desarrolladores
-* Open source
+- Perfecto para el análisis de datos:
+    - Potente
+    - Numerosas bibliotecas disponibles
+    - Fácil generación de gráficos
+- Gran comunidad de desarrolladores
+- Open source
 
 ## Hello World!
 
@@ -258,13 +260,13 @@ A pesar de la existencia de otros programas que ofrecen una interfaz gráfica qu
 
 En este caso particular, será necesario ejecutar manualmente los comandos git en la terminal para establecer la configuración remota.
 
-_Primero debemos obtener la dirección remota: _
+- _Obtén la dirección del repositorio remoto que acabas de crear._
 
 ```{r get_remote_rep, out.width = "400px"}
 knitr::include_graphics("figures/remote_address.png")
 ```
 
-- _A continuación, abre un terminal dentro de la carpeta del proyecto. Ejecute la orden de git para establecer la dirección del repositorio remoto_
+- _En un terminal (shell) dentro de la carpeta del proyecto. Ejecuta la orden de git para establecer la dirección del repositorio remoto_
 
 ```{sh add_origin, echo=TRUE, eval=FALSE}
 # substitute '<remote repository address>' with the address copied from GitHub.
@@ -279,6 +281,7 @@ A pesar de añadir la dirección del repositorio remote, aún no es posible comp
 
 Antes de enviar los commits locales, primero debemos especificar a qué rama queremos enviar nuestros cambios, es decir, todavía es necesario vincular el _local master branch_ con el _remote master branch_.
 
+- _Ejecuta la siguiente orden de git. (ésta vincula primero las rama local actual con la remota especificada del remoto y a continuación envía los cambios a la rama del repositorio remoto._
 ```{sh push_to_remote, echo=TRUE, eval=FALSE}
 git push --set-upstream-to=origin/master
 ```
@@ -307,8 +310,10 @@ knitr::include_graphics("figures/pull_btn.png")
 
 Los paquetes desempeñan un papel fundamental en el desarrollo de aplicaciones R. Escritos por la comunidad R, proporciona funcionalidades ya implementadas y listas para ser utilizadas dentro de nuestros programas. La mayoría de los mejores paquetes o bibliotecas están disponibles públicamente en [CRAN](https://cran.r-project.org/) (Comprehensive R Archive Network en inglés), un repositorio muy extenso para paquetes R.
 
-Sin embargo, como el CRAN impone ciertos estándares y buenas prácticas para asegurar una calidad mínima, también podemos obtener paquetes de otras fuentes. La otra alternativa principal para los paquetes R es Github.
-Allí podemos encontrar no sólo los paquetes que todavía no satisfacen los requisitos de CRAN, sino también las últimas versiones de sangrado de la mayoría de los paquetes.
+Sin embargo, como el CRAN impone ciertos estándares y buenas prácticas para asegurar una calidad mínima, también podemos obtener paquetes de otras fuentes. 
+
+La otra alternativa principal para los paquetes R es Github.
+Allí podemos encontrar no sólo los paquetes que todavía no satisfacen los requisitos de CRAN, sino también las últimas versiones en desarrollo de la mayoría de los paquetes.
 
 
 ## Administrar paquetes instalados con RStudio
@@ -320,7 +325,7 @@ knitr::include_graphics("figures/manage_packages.png")
 ```
 
 
-- _Provar de instalar algunos paquetes útiles, que no formen parte de R:_
+- _Instala algunos paquetes esenciales, que no formen parte de R:_
     * `xml`
     * `lubridate`
     * `stringr`
@@ -356,7 +361,7 @@ ggplot(head(db_aggr), aes(x=platform, y=n, fill=platform)) + geom_bar(stat = "id
 
 ---------
 
-# Experimentando con el lenguage
+# Experimentando con el lenguaje
 
 Hasta ahora, hemos visto los principios básicos sobre los que vamos a construir los futuros laboratorios. Para familiarizarse con el mundo R, es necesaria la práctica. 
 
@@ -381,6 +386,8 @@ library("swirl")
 ```{r launch_swirl, echo=TRUE,eval=FALSE}
 swirl()
 ```
+
+---
 
 # Material Complementario
 

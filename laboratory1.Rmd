@@ -19,9 +19,15 @@ knitr::opts_chunk$set(fig.align = 'center')
 
 
 ```{r bootstrap, message=FALSE, warning=FALSE, include=FALSE}
-suppressMessages(suppressWarnings(install.packages("plyr", repos="http://cran.rstudio.com/", quiet = T, dependencies = T)))
-suppressMessages(suppressWarnings(install.packages("dplyr", repos="http://cran.rstudio.com/", quiet = T, dependencies = T)))
-suppressMessages(suppressWarnings(install.packages("ggplot2", repos="http://cran.rstudio.com/", quiet = T, dependencies = T)))
+if (!suppressMessages(suppressWarnings(require("plyr", quietly = T)))) {
+  suppressMessages(suppressWarnings(install.packages("plyr", repos = "http://cran.rstudio.com/", quiet = T, dependencies = T)))
+}
+if (!suppressMessages(suppressWarnings(require("dplyr", quietly = T)))) {  
+  suppressMessages(suppressWarnings(install.packages("dplyr", repos = "http://cran.rstudio.com/", quiet = T, dependencies = T)))
+}
+if (!suppressMessages(suppressWarnings(require("ggplot2", quietly = T)))) {
+suppressMessages(suppressWarnings(install.packages("ggplot2", repos = "http://cran.rstudio.com/", quiet = T, dependencies = T)))
+}
 ```
 
 ``` {r themes, echo=FALSE, eval=FALSE}
@@ -38,13 +44,15 @@ Throughout the laboratories, the theory seen at class will be put in practice in
 
 ---
 
+&nbsp;
+
 # R Language
 
 ```{r r_logo, out.width = "150px"}
 knitr::include_graphics("figures/Rlogo.png")
 ```
 
-The language used in this subject is... **R**. As seen in theory, there are plenty of reasons to use this programming language for the tasks where are about to do.
+The language used in this subject is ...*R*. As seen in theory, there are plenty of reasons to use this programming language for the tasks where are about to do.
 
 * Ideal for data analysis:
     + Powerful
@@ -327,11 +335,13 @@ library("ggplot2")
 ```
 
 ```{r, echo=T, cache=TRUE}
-exploitdb <- "https://raw.githubusercontent.com/offensive-security/exploit-database/master/files.csv"
-download.file(exploitdb, destfile = "db")
+if (!file.exists("db")) {
+  exploitdb_url <- "https://raw.githubusercontent.com/offensive-security/exploit-database/master/files.csv"
+  download.file(exploitdb_url, destfile = "db")
+}
 db <- read.csv("./db", header = T)
 db_aggr <- dplyr::count(db, platform, sort = T)
-ggplot(db_aggr, aes(x="", y=n, fill=platform))+ geom_bar(width = 1, stat = "identity")
+ggplot(db_aggr, aes(x = "", y = n, fill = platform)) + geom_bar(width = 1, stat = "identity")
 ```
 
 This way, we will be able to call the different functions in our code.
@@ -370,6 +380,8 @@ library("swirl")
 ```{r launch_swirl, echo=TRUE,eval=FALSE}
 swirl()
 ```
+
+---
 
 # Complementary references
 
