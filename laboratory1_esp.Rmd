@@ -154,21 +154,13 @@ Por defecto, las otras dos secciones al lado de Source y Console, incluyen el in
 
 Una de las ventajas de usar RStudio sobre otros editores es la posibilidad de fácilmente depurar nuestros programas a través del debugger integrado.
 
-Además, también nos permite establecer puntos de interrupción en cualquier punto de nuestro programa para que podamos pausar la ejecución en cualquier momento e inspeccionar el entorno en ese preciso instante de la ejecución. 
+Este permite establecer puntos de interrupción, breakpoints, en cualquier punto de nuestro programa para que podamos pausar la ejecución en cualquier momento e inspeccionar el entorno en ese preciso instante de la ejecución. 
 
-- _Prueba el debugger cuando se ejecuta una funció incorrecta, `bad_func()` del archivo r_sample.R, la cual tiene error de ejecución._
-
-
-```{r debug_func, echo=TRUE,eval=FALSE}
-bad_func(www.google.com)
-```
+- _Prueba establecer un breakpoint en cualquiera de las líneas de la funcione incluida en el fichero r_sample.R. A continuación, ejecuta la funcion y comprueba como se detiene la ejecución en los breakpoints insertados._
 
 El interprete debería detener la ejecución en la línea determinada. En este momento, la sección de entorno de RStudio debe contener todos los objetos y su valor en el mismo momento del error de ejecución.
 Además, también permite navegar por la pila de entornos creado durante la ejecución.
 
-Una vez visto cómo usar el debugger para depurar cualquier error en el código, podemos también aprovecharlo para detener la ejecución en cualquier línea insertando los breakpoints correspondientes.
-
-- Prueba establecer unos cuantos breakpoints en cualquiera de las funciones proporcionadas. A continuación, ejecutarlas y comprueba como se detiene la ejecución en los breakpoints insertados._
 
 -------
 

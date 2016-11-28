@@ -155,21 +155,12 @@ By default, the other two sections grouped beside the Source and the Console, in
 
 One of the best advantages of using RStudio over other editors is the possibility to easily debug our programs through its integrated debugger.
 
-Additionally, it also allows us to set breakpoints to anywhere in our program so that we can pause the execution at any moment and inspect the environment in this precise moment.
+It allows us to set breakpoints to anywhere in our program so that we can pause the execution at any moment and inspect the environment in this precise moment.
 
-- _Try the debugger when an erroneous function like `bad_func()` from file `r_sample.R` is executed._
-
-```{r debug_func, echo=TRUE,eval=FALSE}
-bad_func(www.google.com)
-```
+- _Try setting a breakpoint in any line from the function provided. Then execute those and see what happens._
 
 You should see how the console stops at a certain point. At this moment, the environment section from RStudio should contain all the objects and their content at the very moment of the execution error.
-Moreover, you can also navigate through the stack of environments.
-
-Now that we have seen how to use the debugger in case of any errors on our code, we can actually take advantage of that by stopping the execution at our will using the breakpoints.
-
-- _Try setting a few breakpoints in any of the functions provided. Then execute those and see what happens._
-
+Moreover, you can also navigate through the stack of environments if any.
 
 -------
 
