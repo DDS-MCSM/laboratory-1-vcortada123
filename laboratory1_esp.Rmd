@@ -384,6 +384,7 @@ swirl()
 # Material Complementario
 
 - [RStudio Cheatsheet](https://www.rstudio.com/wp-content/uploads/2016/01/rstudio-IDE-cheatsheet.pdf)
+- [Git Cheatsheet](http://files.zeroturnaround.com/pdf/zt_git_cheat_sheet.pdf)
 - [Interactive R Tutorial](http://tryr.codeschool.com/)
 - [Interactice Git Tutorial](https://try.github.io/levels/1/challenges/1)
 - [Git Book](https://git-scm.com/book/en/v2)
