@@ -239,3 +239,123 @@ _A continuación, abra un terminal dentro de la carpeta del proyecto y ejecute e
 git remote add origin <remote repository address>
 ```
 
+Si la dirección remota es correcta (https o ssh preferiblemente), nuestro repositorio git local ahora es consciente del repositorio remoto.
+
+## Enviar al remote
+
+A pesar de añadir la dirección del repositorio remote, aún no es posible compartir nuestros cambios.
+
+Antes de enviar los commits locales, primero debemos especificar a qué rama queremos enviar nuestros cambios, es decir, todavía es necesario vincular el _local master branch_ con el _remote master branch_.
+
+```{sh, echo=TRUE, eval=FALSE}
+git push --set-upstream-to=origin/master
+```
+
+Después de enviar el comando anterior, no solo habremos establecido la relación entre las ramas principales (locales y remotas) sino que también enviaremos los últimos cambios realizados en nuestro repositorio local al repositorio remoto.
+
+```{r push_button, out.width = "500px"}
+knitr::include_graphics("figures/push_btn.png")
+```
+De ahora en adelante, la próxima vez que queramos publicar los commits realizados desde el repositorio local al remoto, será suficiente con enviarlo. Dado que se trata de una acción muy común, la flecha verde hacia arriba desde el panel git envía los nuevos commits al control remoto para que otros desarrolladores puedan buscarlo.
+
+## Pull from remote
+
+Por último, en caso de que estemos interesados en recuperar los últimos commits enviados al repositorio remoto del equipo e integrar esto a nuestro código, podemos usar el comando pull de git.
+
+De forma similar a la acción de enviar, en RStudio, la flecha hacia abajo azul del panel git activa el pull desde el remoto.
+
+```{r pull_button, out.width = "500px"}
+knitr::include_graphics("figures/pull_btn.png")
+```
+
+--------
+
+# Paquetes
+
+Los paquetes desempeñan un papel fundamental en el desarrollo de aplicaciones R. Escritos por la comunidad R, proporciona funcionalidades ya implementadas y listas para ser utilizadas dentro de nuestros programas. La mayoría de los mejores paquetes o bibliotecas están disponibles públicamente en CRAN (Comprehensive R Archive Network), un repositorio muy extenso para paquetes R.
+
+Sin embargo, como el CRAN impone ciertos estándares y buenas prácticas para asegurar una calidad mínima, también podemos obtener paquetes de otras fuentes. La otra alternativa principal para los paquetes R es Github.
+Allí podemos encontrar no sólo los paquetes que todavía no satisfacen los requisitos de CRAN, sino también las últimas versiones de sangrado de la mayoría de los paquetes.
+
+
+## Administrar paquetes instalados con RStudio
+
+Para gestionar los paquetes instalados, una vez más, RStudio proporciona una interfaz GUI útil que facilita su administración. A pesar de ello, es posible ver todos los paquetes ya instalados, instalar nuevos (desde CRAN o carpeta local), actualizar y desinstalar.
+
+```{r, out.width = "500px"}
+knitr::include_graphics("figures/manage_packages.png")
+```
+
+
+- _Provar de instalar algunos paquetes útiles, que no formen parte de R:_
+    * dplyr
+    * ggplot2
+    * stringr
+
+
+## Usando los paquetes instalados
+
+Una vez que se ha instalado un paquete, con el fin de utilizar las funciones que exportan, es decir, las características que queremos utilizar, primero debemos cargarlos en la memoria para poder usarlos.
+
+Para ello, es tan simple como incluir el paquete instalado en nuestro programa.
+
+```{r, echo=TRUE}
+  library("ggplot2")
+# now we can use functions exported by this package
+```
+
+```{r, echo=T, cache=TRUE}
+exploitdb <- "https://raw.githubusercontent.com/offensive-security/exploit-database/master/files.csv"
+download.file(exploitdb, destfile = "db")
+db <- read.csv("./db", header = T)
+db_aggr <- dplyr::count(db, platform, sort = T)
+ggplot(db_aggr, aes(x="", y=n, fill=platform))+ geom_bar(width = 1, stat = "identity")
+```
+
+De esta manera, podremos llamar a las diferentes funciones de nuestro código.
+
+Por ejemplo, usando dply y ggplot, podemos ver fácilmente las plataformas con más vulnerabilidades
+
+```{r, echo=T, cache=TRUE}
+db_aggr <- dplyr::count(db, platform, sort = T)
+ggplot(head(db_aggr), aes(x=platform, y=n, fill=platform)) + geom_bar(stat = "identity")
+```
+
+## Creando nuevos paquetes
+
+Una forma de contribuir a la comunidad R es crear, por ejemplo, un nuevo paquete que implemente nuevas funcionalidades para que otros usuarios puedan hacer uso de ellas.
+
+# Devtools como un paquete para crear paquetes
+
+# Cloning net-basic
+
+# Estructura básica de un paquete
+
+
+---------
+
+# Experimentando con el lenguage
+
+Hasta ahora, hemos visto los principios básicos sobre los que vamos a construir los futuros laboratorios. Para familiarizarse con el mundo R, es necesaria la práctica. 
+
+Puesto que los siguientes laboratorios presuponen un cierto conocimiento de R, se debe completar la introducción de swirl, ya que representa una gran introducción al lenguaje en si de una manera interactiva y guiada.
+
+1. Instalar el paquete Swirl (utilizar el panel de paquetes o seguir las instrucciones R en la consola):
+
+```{r, echo=TRUE, eval=FALSE}
+if (!require("swirl")) {
+  install.packages("swirl", repos="http://cran.rstudio.com/", quiet = T)
+}
+```
+
+2. Load the just installed package:
+
+```{r, echo=T, eval=FALSE}
+library("swirl")
+```
+
+3. Launch swirl and complete the tutorial:
+
+```{r, echo=TRUE,eval=FALSE}
+swirl()
+```

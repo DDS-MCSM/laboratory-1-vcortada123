@@ -280,6 +280,7 @@ There we can find not only the those packages that do not satisfy the CRAN requi
 
 
 ## Manage installed packages with RStudio
+
 To manage installed packages, once again, RStudio provide an easy GUI interface that facilitates the administration of the packages. Though it, it is possible to view all already installed packages, install new ones (from CRAN or local folder), update and uninstall.
 
 ```{r, out.width = "500px"}
