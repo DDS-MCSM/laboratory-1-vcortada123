@@ -327,7 +327,8 @@ library("ggplot2")
 
 ```{r, echo=T, cache=TRUE}
 if (!file.exists("db")) {
-  exploitdb_url <- "https://raw.githubusercontent.com/offensive-security/exploit-database/master/files.csv"
+  exploitdb_url <- "https://github.com/offensive-security/exploit-database/raw/master/files_exploits.csv"
+  #exploitdb_url <- "https://raw.githubusercontent.com/offensive-security/exploit-database/master/files.csv"
   download.file(exploitdb_url, destfile = "db")
 }
 db <- read.csv("./db", header = T)
